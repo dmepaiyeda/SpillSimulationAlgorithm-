@@ -215,7 +215,7 @@ public class Grid {
  
     public void Spill (int row, int col, int strength) {
     	//int cell = surface[0][0];
-		jjdkdk
+		
 		if (strength == 0){
 			return;
 		}

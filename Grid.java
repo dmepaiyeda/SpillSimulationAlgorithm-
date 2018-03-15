@@ -8,6 +8,8 @@ import java.util.Scanner;
   * @author Sophie Quigley
   */
 
+final int OBSTACLE = -1;
+
 public class Grid {
     /**
      * Random number generator to create obstacles
@@ -219,16 +221,19 @@ public class Grid {
 		if (strength == 0){
 			return;
 		}
-		if (x<0 || x>=m ||  y<0 || y>=n){
+	/*	if (x<0 || x>=m ||  y<0 || y>=n){
+			return;
+		}*/
+		if (!isCell(row, col)){
 			return;
 		}
-		if (cell == OBSTACLE){
+		if (grid[row][col].isObstacle()){
 			return;
 		}
-		if (cell < strength){
+	/*	if (grid[row][col]< strength){
 			surface[x][y] = strength;	
 		}
-		cell = surface[x][y];
+		grid[row][col] = surface[x][y];
 		Spill(x-1,y-1,strength-1);
 		Spill(x-1,y,strength-1);
 		Spill(x-1,y+1,strength-1);

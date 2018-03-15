@@ -155,7 +155,7 @@ public class Grid {
      */
     public void putObstacle(int row, int col) {
         if (isCell(row,col))
-            grid[row][col].putObstacle();
+            cell[row][col].putObstacle();
     }
 
     /**
@@ -215,6 +215,7 @@ public class Grid {
      * @param strength strength(concentration) of the spill
      */
  
+ /*Simple recursive algorithm Lab3 Algorithm */
     public void Spill (int row, int col, int strength) {
     	//int cell = surface[0][0];
 		
@@ -224,12 +225,27 @@ public class Grid {
 	/*	if (x<0 || x>=m ||  y<0 || y>=n){
 			return;
 		}*/
-		if (!isCell(row, col)){
+		if (!isCell(row, col)){ //if cell is out of bounds
+			return; 
+		}
+		if (grid[row][col].isObstacle()){ //if cell is an obstacle
 			return;
 		}
-		if (grid[row][col].isObstacle()){
-			return;
+		
+		if (grid[row][col].getValue() < strength){
+			grid[row][col].setValue(strength);
 		}
+		
+		Spill(row-1,col-1,strength-1);
+		Spill(row-1,col,strength-1);
+		Spill(row-1,col+1,strength-1);
+		Spill(row,col-1,strength-1);
+		Spill(row,col+1,strength-1);
+		Spill(row+1,col-1,strength-1);
+		Spill(row+1,col,strength-1);
+		Spill(row+1,col+1,strength-1);
+		
+		
 	/*	if (grid[row][col]< strength){
 			surface[x][y] = strength;	
 		}
